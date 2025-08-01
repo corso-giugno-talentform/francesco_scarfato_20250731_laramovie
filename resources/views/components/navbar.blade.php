@@ -1,14 +1,20 @@
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="{{ route('homepage') }}">{{ env('APP_NAME') }}</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <a  href="{{ route('homepage') }}" class="navbar-brand">{{ env('APP_NAME') }}</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                <li class="nav-item"><a class="nav-link" href="{{ route('homepage') }}">Home</a></li>
+                <li class="nav-item">
+                    <a href="{{ route('homepage') }}" class="nav-link">Home</a>
+                </li>
                 
                 @auth
-                <li class="nav-item"><a class="nav-link" href="{{ route('movies.index') }}">Gestione Film</a></li>
+                    @if (Auth::user()->checkIfAdmin())
+
+                    <li class="nav-item">
+                        <a href="{{ route('movies.index') }}" class="nav-link">Gestione Film</a>
+                    </li>
+                    @endif
                 @endauth
             </ul>
 
@@ -16,12 +22,12 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 @auth
                     <li class="nav-item">
-                        <a class="nav-link" href="">Ciao, {{ Auth::user()->name }}</a>
+                        <a class="nav-link" href="#">Ciao, {{ Auth::user()->name }}</a>
                     </li>
                     <li class="nav-item">
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button class="nav-link" type="submit">logout</button>
+                            <button class="nav-link" type="submit">Esci</button>
                         </form>
                     </li>
                 @else

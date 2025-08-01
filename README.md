@@ -21,8 +21,8 @@
 2. **Creazione progetto Laravel con:**
    - Laravel Vite -> ok
    - Bootstrap  -> ok
-   - Template grafico di base
-   - Componenti Blade
+   - Template grafico di base -> ok
+   - Componenti Blade -> ok
 
 ### Autenticazione e Utenti
 3. **Gestire Autenticazione con Laravel Fortify**

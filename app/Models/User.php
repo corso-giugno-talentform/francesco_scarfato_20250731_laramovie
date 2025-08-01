@@ -45,4 +45,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Undocumented function
+     *
+     * @return boolean
+     */
+    public function checkIfAdmin()
+    {
+        return $this->is_admin ? true : false;
+    }
 }
