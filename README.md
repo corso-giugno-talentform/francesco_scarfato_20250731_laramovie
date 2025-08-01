@@ -88,7 +88,7 @@ POST /films         -> store (solo admin)
 ```
 
 ### Email
-- Configurare Mailtrap per ambiente di sviluppo
+- Configurare Mailtrap per ambiente di sviluppo -> ok
 
 ---
 
@@ -97,8 +97,4 @@ POST /films         -> store (solo admin)
 ### Repository GitHub
 - Progetto Laravel completo
 - Commit organizzati per fase
-
-
-
-
 
