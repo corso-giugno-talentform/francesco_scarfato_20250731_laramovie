@@ -10,7 +10,8 @@
                 <div class="align-middle gap-2 d-flex justify-content-between">
                     <h3>Elenco Film</h3>
                     <form class="d-flex" action="#" role="search" method="POST">
-                        <input name="search" type="search" class="form-control me-2" placeholder="Cerca Articolo"
+                        @csrf
+                        <input name="search" type="search" class="form-control me-2" placeholder="Cerca Film"
                             aria-label="Search">
                     </form>
                     <a href="{{ route('movies.create') }}" class="btn btn btn-success me-md-2">
@@ -57,7 +58,7 @@
 
                                 <td>
                                     <div class="d-grid d-md-flex justify-content-md-end">
-                                        <a href="{{ route('movies.detail', $movie->id) }}" class="btn btn-primary me-md-2">
+                                        <a href="{{ route('movies.show', ['movie' => $movie]) }}" class="btn btn-primary me-md-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                                 <path
@@ -66,14 +67,22 @@
                                                     d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0" />
                                             </svg>
                                         </a>
-                                        <a href="{{ route('movies.edit', $movie->id) }}" class="btn btn-warning me-md-2">
+                                        <a href="{{ route('movies.edit', ['movie' => $movie]) }}" class="btn btn-warning me-md-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
                                                 <path
                                                     d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325" />
                                             </svg>
                                         </a>
-                                        <a href="{{ route('movies.delete', $movie->id) }}" class="btn btn-danger me-md-2">
+
+                                        {{-- <form class="d-flex" action="{{ route('movies.destroy', ['movie' => $movie])}}" role="search" method="POST">
+                                            @csrf
+                                            @method('DELETE') --}}
+                                        <button type="button"
+                                            onclick="setMovieId({{ $movie->id }})"
+                                            class="btn btn-danger me-md-2"
+                                            data-bs-toggle="modal"                                           
+                                            data-bs-target="#deleteModal">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                                 <path
@@ -81,7 +90,8 @@
                                                 <path
                                                     d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
                                             </svg>
-                                        </a>
+                                        </button>
+                                        {{-- </form> --}}
                                     </div>
                                 </td>
                             </tr>
@@ -95,3 +105,42 @@
 
     <x-footer />
 </x-template>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="deleteModalLabel">Conferma Cancellazione</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="mb-0">Sei sicuro di voler cancellare questo film?<br />Questa azione non è reversibile.</p>
+            </div>
+            
+            <form id="modal-delete-form" class="d-flex" action="{{ route('movies.destroy', ['movie' => $movie->id])}}" role="search" method="POST">
+                @csrf
+                @method('DELETE')
+                <input type="hidden" id="modal-movie-id" name="modal-movie-id" value="" />
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                <button type="submit" class="btn btn-danger" id="confirmDelete">Cancella</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+function setMovieId(movieId) {
+    console.log(movieId);
+    let modalForm = document.getElementById('modal-delete-form');
+    let modalValue = document.getElementById('modal-movie-id');
+    let modalAction = modalForm.action;
+
+    modalValue.value = movieId;
+    console.log(modalValue);
+    console.log(x);
+    
+    modalForm.action = 'movies/' + movieId;
+}
+</script>

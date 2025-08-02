@@ -3,8 +3,8 @@
     <div class="container">
         <div class="row">
             <div id="create-movie">
-                <h1>Inserisci un nuovo film</h1>
-                <x-movies.form-create />
+                <h1>Aggiorna scheda film</h1>
+                <x-movies.form-edit :$movie/>
             </div>
         </div>
     </div>

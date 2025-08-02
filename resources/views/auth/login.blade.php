@@ -9,7 +9,7 @@
                 @csrf
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email">
+                    <input id="email" name="email" type="email" class="form-control">
                     @error('email')
                         <div class="alert alert-danger mt-2" role="alert">
                             {{ $message }}
@@ -19,7 +19,7 @@
 
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="password">
+                    <input id="password" name="password" type="password" class="form-control">
                     @error('email')
                         <div class="alert alert-danger mt-2" role="alert">
                             {{ $message }}

@@ -8,7 +8,8 @@
         @csrf
         <div class="form-group">
             <label for="name">Nome</label>
-            <input type="name" class="form-control" id="name" name="name" value="{{ old('name') }}">
+            <input id="name" name="name" type="name" class="form-control"
+                value="{{ old('name') }}">
             @error('name')
             <div class="alert alert-danger mt-2" role="alert">
                 {{ $message }}
@@ -17,7 +18,8 @@
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email"value="{{ old('email') }}">
+            <input id="email" name="email" type="email" class="form-control"
+                value="{{ old('email') }}">
             @error('email')
             <div class="alert alert-danger mt-2" role="alert">
                 {{ $message }}
@@ -26,7 +28,7 @@
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" name="password">
+            <input id="password" name="password" type="password" class="form-control">
             @error('password')
             <div class="alert alert-danger mt-2" role="alert">
                 {{ $message }}
@@ -35,7 +37,7 @@
         </div>
         <div class="form-group">
             <label for="password_confirmation">Conferma Password</label>
-            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
+            <input id="password_confirmation" name="password_confirmation" type="password" class="form-control">
             @error('password_confirmation')
             <div class="alert alert-danger mt-2" role="alert">
                 {{ $message }}

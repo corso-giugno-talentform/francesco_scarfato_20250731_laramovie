@@ -6,18 +6,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PageController::class, 'homepage'])->name('homepage');
 
-
-// ### Gestione Film
-// 5. **Creare risorsa Films** con le seguenti rotte:
-//    - INDEX (visualizzazione lista)
-//    - CREATE (form creazione - solo admin)
-//    - STORE (salvataggio - solo admin)
-
 Route::middleware(['auth'])->group(function () {
     Route::get('/movies', [MovieController::class, 'index'])->name('movies.index');
     Route::get('/movies/create', [MovieController::class, 'create'])->name('movies.create');
-    Route::get('/movies/{movie}/detail', [MovieController::class, 'detail'])->name('movies.detail');
-    Route::get('/movies/{movie}/edit', [MovieController::class, 'edit'])->name('movies.edit');
-    Route::get('/movies/{movie}/delete', [MovieController::class, 'delete'])->name('movies.delete');
     Route::post('/movies/store', [MovieController::class, 'store'])->name('movies.store');
+    Route::get('/movies/{movie}/show', [MovieController::class, 'show'])->name('movies.show');
+    Route::get('/movies/{movie}/edit', [MovieController::class, 'edit'])->name('movies.edit');
+    Route::put('/movies/{movie}/update', [MovieController::class, 'update'])->name('movies.update');
+    Route::delete('/movies/{movie}', [MovieController::class, 'destroy'])->name('movies.destroy');
 });
