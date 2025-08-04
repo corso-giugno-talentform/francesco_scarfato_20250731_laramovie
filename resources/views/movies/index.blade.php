@@ -2,8 +2,11 @@
     <x-navbar />
     <x-movies.genre-menu />
 
-    <main>
+    
+        <x-alert :type="session('message_type')" />
+    
 
+    <main>
         <div class="rounded-3 py-5 px-4 px-md-5 mb-5">
 
             <div class="container mt-5">
@@ -117,7 +120,7 @@
                 <p class="mb-0">Sei sicuro di voler cancellare questo film?<br />Questa azione non è reversibile.</p>
             </div>
             
-            <form id="modal-delete-form" class="d-flex" action="{{ route('movies.destroy', ['movie' => $movie->id])}}" role="search" method="POST">
+            <form id="modal-delete-form" class="d-flex" action="#" role="search" method="POST">
                 @csrf
                 @method('DELETE')
                 <input type="hidden" id="modal-movie-id" name="modal-movie-id" value="" />
@@ -135,12 +138,11 @@ function setMovieId(movieId) {
     console.log(movieId);
     let modalForm = document.getElementById('modal-delete-form');
     let modalValue = document.getElementById('modal-movie-id');
-    let modalAction = modalForm.action;
+    modalForm.action = 'movies/' + movieId;
 
     modalValue.value = movieId;
     console.log(modalValue);
-    console.log(x);
-    
-    modalForm.action = 'movies/' + movieId;
+    console.log(modalAction);
+    console.log(movieId);
 }
 </script>

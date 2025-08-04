@@ -27,8 +27,9 @@
 
     <div class="form-group">
         <label for="description">Descrizione</label>
-        <input id="description" name="description" type="text"  class="form-control"
-            placeholder="Inserisci la descrizione" value="{{ old('description') }}" />
+                <textarea id="description" name="description" class="form-control"
+                    rows="5"
+                    placeholder="Inserisci la descrizione"/>{{ $movie->description }}</textarea>
         @error('description')
             <div class="alert alert-danger mt-2" role="alert">
                 {{ $message }}

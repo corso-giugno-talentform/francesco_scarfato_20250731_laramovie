@@ -104,7 +104,6 @@ class MovieController extends Controller
      */
     public function destroy(Movie $movie)
     {
-        dd($movie);
         $movie->delete();
         return Redirect::route('movies.index')
             ->with('success', 'Film Eliminato');
