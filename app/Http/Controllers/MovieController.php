@@ -15,6 +15,17 @@ class MovieController extends Controller
      *
      * @return void
      */
+    public function catalog()
+    {
+        $movies = Movie::orderBy('title', 'asc')->paginate(5);
+        return view('movies.catalog', compact('movies'));
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
     public function index()
     {
         $movies = Movie::orderBy('title', 'asc')->get();
@@ -29,7 +40,7 @@ class MovieController extends Controller
 
     /**
      *
-     * @param StoreBookRequest $request
+     * @param StoreMovieRequest $request
      * @return void
      */
     public function store(StoreMovieRequest $request)

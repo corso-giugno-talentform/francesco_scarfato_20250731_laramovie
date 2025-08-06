@@ -7,6 +7,12 @@
                 <li class="nav-item">
                     <a href="{{ route('homepage') }}" class="nav-link">Home</a>
                 </li>
+
+                @guest
+                <li class="nav-item">
+                    <a class="nav-link @if (request()->routeIs('movies.*')) active @endif" href="{{ route('movies.catalog') }}">Catalogo</a>
+                </li>
+                @endguest
                 
                 @auth
                     @if (Auth::user()->checkIfAdmin())
